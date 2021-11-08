@@ -1,0 +1,81 @@
+openapi: 3.0.1
+info:
+  title: Composer API
+  version: 1.0.0
+paths:
+  /Composers:
+    get:
+      tags:
+        - Composers
+      summary: Returns a list of composer documents
+      description: API for returning a list of composers from MongoDB Atlas
+      operationId: findAllComposers
+      
+      responses:
+        '200':
+          description: Composer documents
+          
+        '500':
+          description: Server Exeption
+          
+        '501':
+          description: MogoDB Exeption
+    post:
+      tags:
+        - Composers
+      summary: Creates a new composer object
+      operationId: createComposer
+      requestBody:
+        description: Composer's information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Composer'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Composer'
+        required: false
+      responses:
+        '200':
+          description: User added
+        '500':
+          description: Server Exeption
+        '501':
+          description: MogoDB Exeption
+      x-codegen-request-body-name: body
+  /composers/{id}:
+    get:
+      tags:
+        - Composers
+      summary: Returns a composer document
+      description: API for returning a single composer object from MongoDB
+      operationId: findComposerByID
+      parameters:
+        - name: id
+          in: path
+          description: The composer id requested by the user
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Composer document in JSON format
+        '500':
+          description: Server Exeption
+        '501':
+          description: MogoDB Exeption
+components:
+  schemas:
+    Composer:
+      type: object
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+      xml:
+        name: Composer
+
+
