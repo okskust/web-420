@@ -8,11 +8,12 @@
 ;===========================================
 */
 //Requires modules and puts it in the variables.
-let express = require("express");
-let http = require("http");
-let swaggerUi = require("swagger-ui-express");
-let swaggerJsdoc = require("swagger-jsdoc");
-let mongoose = require("mongoose");
+const express = require("express");
+const http = require("http");
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsdoc = require("swagger-jsdoc");
+const mongoose = require("mongoose");
+const composerAPI = require('./routes/kustova-composer-routes');
 
 //Calls the express function to start a new Express application.
 let app = express();
@@ -36,6 +37,7 @@ const options = {
 };
 let openapiSpecification = swaggerJsdoc(options);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openapiSpecification));
+app.use("/api", composerAPI);
 
 //Starts the server.
 http.createServer(app).listen(app.get("port"), function () {
