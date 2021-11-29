@@ -15,6 +15,7 @@ const swaggerJsdoc = require("swagger-jsdoc");
 const mongoose = require("mongoose");
 const composerAPI = require("./routes/kustova-composer-routes");
 const personAPI = require("./routes/kustova-person-routes");
+const userAPI = require('./routes/kustova-session-routes');
 
 //Calls the express function to start a new Express application.
 let app = express();
@@ -60,6 +61,7 @@ const openapiSpecification = swaggerJsdoc(options);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 app.use("/api", composerAPI);
 app.use("/api", personAPI);
+app.use("/api", userAPI);
 
 //Starts the server.
 http.createServer(app).listen(app.get("port"), function () {
