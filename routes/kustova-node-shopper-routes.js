@@ -169,35 +169,52 @@ router.post("/customers/:username/invoices", async (req, res) => {
 });
 
 /**
- * findAllPersons
+ * findAllInvoicedByUserName
  * @openapi
- * /api/persons:
+ * /api/customers/{username}/invoices:
  *   get:
  *     tags:
- *       - Persons
- *     description: API for returning a list of person documents from MongoODB
- *     summary: return list of person document
+ *       - Invoices
+ *     description:  API for returning all customer's invoices
+ *     summary: returns all customer's invoices
+ *     parameters:
+ *       - name: username
+ *         in: path
+ *         required: true
+ *         description: Requested username
+ *         schema:
+ *           type: string
  *     responses:
  *       '200':
- *         description: Array of person documents
+ *         description: Customer invoices documents
  *       '500':
- *         description: Server Exception
+ *         description: Server exception
  *       '501':
  *         description: MongoDB Exception
  */
-router.get("/persons", async (req, res) => {
+
+router.get("/customers/:username/invoices", async (req, res) => {
   try {
-    Person.find({}, function (err, persons) {
-      if (err) {
-        console.log(err);
-        res.status(501).send({
-          message: `MongoDB Exception: ${err}`,
-        });
-      } else {
-        console.log(persons);
-        res.json(persons);
+    Customer.findOne(
+      { userName: req.params.username },
+      function (err, customer) {
+        if (err) {
+          console.log(err);
+          res.status(500).send({
+            message: `MongoDB Exception: ${err}`,
+          });
+        } else {
+          if (customer.invoices.length === 0) {
+            let response = customer.userName + " doesn't have any invoices.";
+            console.log(response);
+            res.send(response);
+          } else {
+            console.log(customer.invoices);
+            res.json(customer.invoices);
+          }          
+        }
       }
-    });
+    );
   } catch (e) {
     console.log(e);
     res.status(500).send({
