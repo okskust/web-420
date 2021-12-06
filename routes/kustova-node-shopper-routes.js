@@ -107,7 +107,7 @@ router.post("/customers", async (req, res) => {
  *                 type: string
  *               dateShipped:
  *                 type: string
- *               lineItem:
+ *               lineItems:
  *                 type: array
  *                 items:
  *                   type: object
@@ -145,7 +145,7 @@ router.post("/customers/:username/invoices", async (req, res) => {
           tax: req.body.tax,
           dateCreated: req.body.dateCreated,
           dateShipped: req.body.dateShipped,
-          lineItem: req.body.lineItem,
+          lineItems: req.body.lineItems,
         };
         customer.invoices.push(newInvoice);
 

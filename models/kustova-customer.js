@@ -12,7 +12,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // lineItem schema
-let lineItemSchema = new Schema({
+let lineItemsSchema = new Schema({
     name: { type: String },
     price: { type: Number },
     quantity: { type: Number }
@@ -24,7 +24,7 @@ let invoiceSchema = new Schema({
     tax: { type: Number },
     dateCreated: { type: String },
     dateShipped: { type: String },
-    lineItems: [lineItemSchema]
+    lineItems: [lineItemsSchema]
 });
 
 // customer schema
