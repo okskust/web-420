@@ -77,7 +77,7 @@ router.post("/customers", async (req, res) => {
  * /api/customers/{username}/invoices:
  *   post:
  *     tags:
- *       - Invoices
+ *       - Customers
  *     name: createInvoiceByUserName
  *     summary: Creates a new Customer's invoice document
  *     parameters:
@@ -94,7 +94,7 @@ router.post("/customers", async (req, res) => {
  *           schema:
  *             required:
  *               - subtotal
- *               - subtotal
+ *               - tax
  *               - dateCreated
  *               - dateShipped
  *               - lineItems
@@ -174,7 +174,7 @@ router.post("/customers/:username/invoices", async (req, res) => {
  * /api/customers/{username}/invoices:
  *   get:
  *     tags:
- *       - Invoices
+ *       - Customers
  *     description:  API for returning all customer's invoices
  *     summary: returns all customer's invoices
  *     parameters:

@@ -17,6 +17,7 @@ const composerAPI = require("./routes/kustova-composer-routes");
 const personAPI = require("./routes/kustova-person-routes");
 const userAPI = require('./routes/kustova-session-routes');
 const customerAPI = require('./routes/kustova-node-shopper-routes');
+const teamAPI = require('./routes/kustova-team-routes');
 
 //Calls the express function to start a new Express application.
 let app = express();
@@ -64,6 +65,8 @@ app.use("/api", composerAPI);
 app.use("/api", personAPI);
 app.use("/api", userAPI);
 app.use("/api", customerAPI);
+app.use("/api", teamAPI);
+
 //Starts the server.
 http.createServer(app).listen(app.get("port"), function () {
   console.log("Application started on port " + app.get("port"));
